@@ -1,6 +1,17 @@
 # Kaps Job Tracker
 
-A job application tracking web app built with modern web technologies.
+Job hunting can be overwhelming. Between managing dozens of applications, keeping track of interviews, offers, and rejections, it’s easy to lose track of where you stand. I built **Kaps Job Tracker** to tackle this exact struggle.  
+
+This app helps you:
+
+- Track multiple job applications in one place
+- Monitor the status of each application (Applied, Interviewing, Offer, Rejected)
+- Organize different types of jobs (Full-time, Part-time, Contract, Internship)
+- Quickly view and update your application history with a clean, intuitive interface
+
+I created this project out of personal necessity, managing a job search manually was chaotic and stressful. With **Kaps Job Tracker**, I wanted a simple, reliable tool that keeps all my applications organized and reduces the mental load, while also giving real time visibility into my progress.  
+
+This project is a reflection of my journey, and a tool that I hope can help anyone else navigating the stressful and complex world of job searching.
 
 ## 🚀 Getting Started
 
