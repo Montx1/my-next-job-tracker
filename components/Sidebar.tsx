@@ -13,7 +13,21 @@ const Sidebar = () => {
 
   return (
     <aside className='py-4 px-8 bg-muted h-full'>
-      <Link href="/"><Image src={Logo} alt="logo" className='mx-auto max-w-40'></Image></Link>
+      <div className="flex flex-col items-center">
+        <Link href="/">
+          <Image
+            src={Logo}
+            alt="logo"
+            className="max-w-40"
+          />
+        </Link>
+
+        <Link href="/">
+          <h1 className="mt-2 text-xl font-semibold">
+            Jobsera
+          </h1>
+        </Link>
+      </div>
       <div className='flex flex-col mt-20 gap-y-4'>
         {links.map((link) => (
           <Button asChild key={link.href} variant={pathname === link.href ? 'default' : 'link'}>
