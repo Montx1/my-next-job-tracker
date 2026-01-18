@@ -71,6 +71,22 @@ export default function Jobs() {
     }
   }
 
+  const removeJob = async () => {
+    if (!selectedJob) return;
+
+    const res = await fetch(`api/jobs/${selectedJob.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (res.ok) {
+      setJobs(jobs.filter(job => job.id !== selectedJob.id));
+      setSelectedJob(null);
+    }
+  }
+
   return (
     <div className='h-[80vh] overflow-y-auto space-y-4 p-4'>
       {jobs.length === 0 && <p>No jobs found. Start by adding a new job!</p>}
@@ -107,8 +123,9 @@ export default function Jobs() {
               <option>Contract</option>
               <option>Internship</option>
             </select>
-            
+              
             <Button className="mt-4 w-full bg-blue-500 text-white rounded hover:bg-blue-700" onClick={saveJob}>Save Changed</Button>
+            <Button className="mt-2 w-full bg-red-500 text-white rounded hover:bg-red-700" onClick={removeJob}>Delete Job</Button>
           </div>
         </div>
       )}
