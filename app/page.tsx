@@ -14,7 +14,7 @@ export default function Home() {
       <section className="flex flex-col lg:flex-row items-center justify-between max-w-6xl mx-auto px-4 sm:px-8 gap-8">
 
         <div className="text-center lg:text-left w-full lg:w-auto">
-          <h1 className="text-3xl font-bold">Welcome to the Landing Page</h1>
+          <h1 className="text-3xl font-bold">Welcome to J*bsera</h1>
           <p className="mt-4 text-gray-600">
             Stay organized and never lose track of your job search. Monitor application status, 
             interview dates, and follow-ups all in one place. Our intuitive tracker helps you manage 

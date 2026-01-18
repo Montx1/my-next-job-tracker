@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kaps Job Tracker
 
-## Getting Started
+Job hunting can be overwhelming. Between managing dozens of applications, keeping track of interviews, offers, and rejections, it’s easy to lose track of where you stand. I built **Kaps Job Tracker** to tackle this exact struggle.  
 
-First, run the development server:
+This app helps you:
+
+- Track multiple job applications in one place
+- Monitor the status of each application (Applied, Interviewing, Offer, Rejected)
+- Organize different types of jobs (Full-time, Part-time, Contract, Internship)
+- Quickly view and update your application history with a clean, intuitive interface
+
+I created this project out of personal necessity, managing a job search manually was chaotic and stressful. With **Kaps Job Tracker**, I wanted a simple, reliable tool that keeps all my applications organized and reduces the mental load, while also giving real time visibility into my progress.  
+
+This project is a reflection of my journey, and a tool that I hope can help anyone else navigating the stressful and complex world of job searching.
+
+## 🚀 Getting Started
+
+Follow the steps below to run the project locally.
+
+### 1. Install Dependencies
+
+From the project root, run:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Set Up Clerk Authentication
+Go to [Clerk](https://clerk.com/) and create an account (or log in).
+Create a new application (you can name it anything) and copy the secret keys provided by Clerk.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Create Environment Variables
+In the root of the project directory, create a .env file and add the following:
 
-## Learn More
+```bash
+CLERK_SECRET_KEY=your_clerk_secret_key
+CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+DATABASE_URL="file:./dev.db"
+```
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Make sure the keys are pasted exactly as provided.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Restart VS Code (Important)
+Completely close VS Code and reopen it.
+This helps prevent environment variable and Prisma related issues.
 
-## Deploy on Vercel
+5. Set Up Prisma & Database
+From the project root, run:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
+This will generate the Prisma client and set up the local database.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. Run the App
+In one terminal, start the development server by running:
+```bash
+npm run dev
+```
+In a second terminal (optional), you can view live database updates with:
+
+```bash
+npx prisma studio
+```
+Everything should now work as expected.
+
+✅ Notes
+Restart the dev server if you change .env values
+
+Prisma Studio reflects database changes in real time
+
+SQLite is used for local development
