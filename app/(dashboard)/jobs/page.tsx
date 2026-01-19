@@ -125,7 +125,7 @@ export default function Jobs() {
 
   return (
     <div className='h-[80vh] overflow-y-auto space-y-4 p-4'>
-      <div className='h-[25vh] flex flex-start flex-col gap-2'>
+      <div className='h-[27vh] flex flex-start flex-col gap-2'>
         <h1 className='font-xxl'><strong>Filter jobs</strong></h1>
         <div className="flex flex-row gap-4 p-4 bg-muted/40 rounded-xl border shadow-sm backdrop-blur-sm">
           <input
