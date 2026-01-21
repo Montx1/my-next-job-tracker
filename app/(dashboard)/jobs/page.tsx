@@ -1,6 +1,10 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState, AppDispatch } from '@/store/store'
+import { fetchJobs, updateJob, deleteJob, replaceItems } from '@/store/jobsSlice'
+
 import React from 'react'
 
 interface Job {
@@ -15,9 +19,13 @@ interface Job {
 }
 
 export default function Jobs() {
-  const [jobs, setJobs] = useState<Job[]>([])
+  const dispatch = useDispatch<AppDispatch>();
+  const jobs = useSelector((state: RootState) => state.jobs.items)
+  const allJobs = useSelector((state: RootState) => state.jobs.allItems)
+
+  // const [jobs, setJobs] = useState<Job[]>([])
   const [selectedJob, setSelectedJob] = useState<Job | null>(null)
-  const [allJobs, setAllJobs] = useState<Job[]>([])
+  // const [allJobs, setAllJobs] = useState<Job[]>([])
   const [formData, setFormData] = useState({
     position: '',
     company: '',
@@ -35,20 +43,21 @@ export default function Jobs() {
   })
 
   useEffect(() => {
-    const fetchJobs = async () => {
-      const res = await fetch('/api/jobs', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      if (!res.ok) return
-      const data = await res.json();
-      setJobs(data);
-      setAllJobs(data);
-    }
-    fetchJobs();
-  }, [])
+    // const fetchJobs = async () => {
+    //   const res = await fetch('/api/jobs', {
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    //   if (!res.ok) return
+    //   const data = await res.json();
+    //   setJobs(data);
+    //   setAllJobs(data);
+    // }
+    // fetchJobs();
+    dispatch(fetchJobs())
+  }, [dispatch])
 
   const openOverlay = (job: Job) => {
     setSelectedJob(job)
@@ -80,8 +89,9 @@ export default function Jobs() {
       body: JSON.stringify(formData),
     })
     if (res.ok) {
-      setJobs(jobs.map(job => job.id === selectedJob.id ? { ...job, ...formData } : job));
-      setAllJobs(allJobs.map(job => job.id === selectedJob.id ? { ...job, ...formData } : job));
+      // setJobs(jobs.map(job => job.id === selectedJob.id ? { ...job, ...formData } : job));
+      // setAllJobs(allJobs.map(job => job.id === selectedJob.id ? { ...job, ...formData } : job));
+      dispatch(updateJob({ ...selectedJob, ...formData }))
       setSelectedJob(null);
     }
   }
@@ -97,8 +107,9 @@ export default function Jobs() {
     })
 
     if (res.ok) {
-      setJobs(jobs.filter(job => job.id !== selectedJob.id));
-      setAllJobs(allJobs.filter(job => job.id != selectedJob.id));
+      // setJobs(jobs.filter(job => job.id !== selectedJob.id));
+      // setAllJobs(allJobs.filter(job => job.id != selectedJob.id));
+      dispatch(deleteJob({ id: selectedJob.id }))
       setSelectedJob(null);
     }
   }
@@ -116,11 +127,12 @@ export default function Jobs() {
 
     console.log(searchData)
     console.log(filtered);
-    setJobs(filtered);
+    // setJobs(filtered);
+    dispatch(replaceItems(filtered))
   }
 
   const resetJobs = () => {
-    setJobs(allJobs);
+    dispatch(replaceItems(allJobs))
   }
 
   return (
